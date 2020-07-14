@@ -31,8 +31,7 @@ public class FieldScript : MonoBehaviour
         {
             if (ps.agentScript != null)
             {
-                //子供は時間が経つごとに報酬を
-                // max step == 3000 だから。
+              // max step == 3000 だから。
               ps.agentScript.AddReward(1f / 3000f);
             }
             else
@@ -50,15 +49,17 @@ public class FieldScript : MonoBehaviour
             print("finish");
             if (ps.agentScript != null)
             {
-            //子供の負け
+                //子供の負け
+                print("one kodomo");
                 ps.agentScript.AddReward(-1);
                 ps.agentScript.Done();
             }
             else
             {
                 //鬼の勝利なので
-                    ps.oniScript.AddReward(1);
-                    ps.oniScript.Done();
+                print("one oni");
+                ps.oniScript.AddReward(1);
+                ps.oniScript.Done();
                 //ps.agentScript.AddReward(1);
             }
         }

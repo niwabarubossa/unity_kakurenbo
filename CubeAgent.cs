@@ -19,6 +19,7 @@ public class CubeAgent : Agent
   public Rigidbody agentRb;
   //public Transform Target;
   public Transform Oni;
+  public GameObject canMoveObject;
   BehaviorParameters m_BehaviorParameters;
   Vector3 m_Transform;
   public FieldScript area;
@@ -78,14 +79,14 @@ public override void InitializeAgent()
     area.Update();
     float distanceToTarget = Vector3.Distance(this.transform.localPosition,
                                               Oni.localPosition);
-    // Reached target
-    //if (distanceToTarget < 1.00f)
-    //{
-    //  area.OniWin();
-    //}
+        // Reached target
+        if (distanceToTarget < 1.00f)
+        {
+            area.OniWin();
+        }
 
-    // Fell off platform
-    if (this.transform.localPosition.y < 0)
+        // Fell off platform
+        if (this.transform.localPosition.y < 0)
     {
       Done();
     }
