@@ -81,10 +81,10 @@ public class OniScript : Agent
         float distanceToTarget = Vector3.Distance(this.transform.localPosition,
                                                   Kodomo.localPosition);
         // Reached target
-        //if (distanceToTarget < 1.00f)
-        //{
-        //    area.OniWin();
-        //}
+        if (distanceToTarget < 1.00f)
+        {
+            area.OniWin();
+        }
 
         // Fell off platform
         if (this.transform.localPosition.y < 0)
