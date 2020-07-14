@@ -54,10 +54,6 @@ public class CubeAgent : Agent
     agentRb = GetComponent<Rigidbody>();
     agentRb.maxAngularVelocity = 500;
 
-        //ここか　startで　getobject
-        //this.privateCanMoveCubeRb = this.canMoveCube.GetComponent<CanMoveCube>().GetComponent<Rigidbody>();
-        //this.privateCanMoveCubeRb = this.GetComponent<CanMoveCube>().GetComponent<Rigidbody>();
-        //this.privateCanMoveCubeRb = this.canMoveCube.GetComponent<Rigidbody>();
         this.privateCanMoveCubeRb = GameObject.Find("canmove").GetComponent<Rigidbody>();
 
 
@@ -89,8 +85,6 @@ public class CubeAgent : Agent
   {
     this.now_step++;
     area.Update();
-    // Fell off platform
-    // Rewards
     float distanceToTarget = Vector3.Distance(this.transform.localPosition,
                                               Oni.localPosition);
     // Reached target
@@ -125,11 +119,9 @@ public class CubeAgent : Agent
             return;
         }
 
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
         if (this.isGrab == 1f)
         {
-            print("isgrab!!");
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
             rb.velocity = pushDir * pushPower;
         }        
     }
@@ -144,7 +136,7 @@ public class CubeAgent : Agent
     var rotateAxis = (int)act[2];
     this.isGrab = (int)act[3];
         
-        switch (forwardAxis)
+    switch (forwardAxis)
     {
       case 1:
         dirToGo = transform.forward * 1f;
@@ -175,26 +167,25 @@ public class CubeAgent : Agent
     }
 
 
-        switch (isGrab)
-        {
-            case 1:
-                this.isGrab = 1f;
-                break;
-            case 2:
-                this.isGrab = 2f;
-                break;
-        }
+    switch (isGrab)
+    {
+        case 1:
+            this.isGrab = 1f;
+            break;
+        case 2:
+            this.isGrab = 2f;
+            break;
+    }
 
-        transform.Rotate(rotateDir, Time.deltaTime * 100f);
+    transform.Rotate(rotateDir, Time.deltaTime * 100f);
     agentRb.AddForce(dirToGo * this.speed,
         ForceMode.VelocityChange);
-        if (this.isGrab == 1f)
-        {
-            print(privateCanMoveCubeRb);
-            this.privateCanMoveCubeRb.AddForce(dirToGo * this.speed,
-             ForceMode.VelocityChange);
-        }
+    if (this.isGrab == 1f)
+    {
+        this.privateCanMoveCubeRb.AddForce(dirToGo * this.speed,
+        ForceMode.VelocityChange);
     }
+}
 
   public override float[] Heuristic()
   {
