@@ -171,7 +171,12 @@ public override void InitializeAgent()
     transform.Rotate(rotateDir, Time.deltaTime * 100f);
     agentRb.AddForce(dirToGo * this.speed,
         ForceMode.VelocityChange);
-    if (this.isGrab == 1f)
+
+
+    float distanceToCube = Vector3.Distance(this.transform.localPosition,
+                                              this.canMoveObject.transform.localPosition);
+
+    if (this.isGrab == 1f && distanceToCube < 1.00f)
     {
         this.privateCanMoveCubeRb.AddForce(dirToGo * this.speed,
         ForceMode.VelocityChange);
