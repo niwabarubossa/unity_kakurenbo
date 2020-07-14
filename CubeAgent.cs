@@ -13,14 +13,13 @@ public class CubeAgent : Agent
     Purple = 1  //鬼
   }
 
-
   [HideInInspector]
   public Team team;
   [HideInInspector]
   public Rigidbody agentRb;
   //public Transform Target;
   public Transform Oni;
-    BehaviorParameters m_BehaviorParameters;
+  BehaviorParameters m_BehaviorParameters;
   Vector3 m_Transform;
   public FieldScript area;
   int m_PlayerIndex;
@@ -29,15 +28,10 @@ public class CubeAgent : Agent
   int now_step;
   float isGrab = 0;
 
-    public CanMoveCube canMoveCube;
-    private Rigidbody privateCanMoveCubeRb;
+  private Rigidbody privateCanMoveCubeRb;
 
-
-
-    public override void InitializeAgent()
+public override void InitializeAgent()
   {
-     
-
     m_BehaviorParameters = gameObject.GetComponent<BehaviorParameters>();
     //outlet したteam idから、初期ポジションを場合分け
     if (m_BehaviorParameters.m_TeamID == (int)Team.Blue)
@@ -54,10 +48,9 @@ public class CubeAgent : Agent
     agentRb = GetComponent<Rigidbody>();
     agentRb.maxAngularVelocity = 500;
 
-        this.privateCanMoveCubeRb = GameObject.Find("canmove").GetComponent<Rigidbody>();
+    this.privateCanMoveCubeRb = GameObject.Find("canMoveObject").GetComponent<Rigidbody>();
 
-
-        var playerState = new PlayerState
+    var playerState = new PlayerState
     {
       agentRb = agentRb,
       startingPos = transform.localPosition,
@@ -67,8 +60,6 @@ public class CubeAgent : Agent
     m_PlayerIndex = area.playerStates.IndexOf(playerState);
     playerState.playerIndex = m_PlayerIndex;
   }
-
-
 
   public override void AgentReset()
   {
@@ -106,7 +97,6 @@ public class CubeAgent : Agent
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody rb = hit.collider.attachedRigidbody;
-        print("collision!!");
         // 相手のオブジェクトにRigidbodyがついていなかったり、isKinematicにチェックが入っている場合には押せない。
         // returnの機能を復習
         if (rb == null || rb.isKinematic)

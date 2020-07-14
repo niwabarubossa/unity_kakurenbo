@@ -137,11 +137,6 @@ public class OniScript : Agent
         transform.Rotate(rotateDir, Time.deltaTime * 100f);
         agentRb.AddForce(dirToGo * this.speed,
             ForceMode.VelocityChange);
-        //if (this.isGrabBool == true)
-        //{
-        //  // area.cube.AddForce(dirToGo * this.speed,
-        //  // ForceMode.VelocityChange);
-        //}
     }
 
     public override float[] Heuristic()
@@ -175,17 +170,6 @@ public class OniScript : Agent
         {
             action[1] = 2f;
         }
-
-        //if (Input.GetKey(KeyCode.Z))
-        //{
-        //    //grab
-        //    action[3] = 1f;
-        //}
-        //if (Input.GetKey(KeyCode.C))
-        //{
-        //    //not grab
-        //    action[3] = 2f;
-        //}
 
         return action;
     }

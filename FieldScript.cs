@@ -18,18 +18,8 @@ public class PlayerState
 
 public class FieldScript : MonoBehaviour
 {
-
-    //public CanMoveCube canMoveCube;
-    //[HideInInspector]
-    //public Rigidbody canMoveCubeRb;
-
     public List<PlayerState> playerStates = new List<PlayerState>();
 
-    private void Awake()
-    {
-        //this.canMoveCubeRb = this.canMoveCube.canMoveCubeRb;
-    }
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -55,29 +45,22 @@ public class FieldScript : MonoBehaviour
 
     public void OniWin()
     {
-    print("oni win");
-        //接触したオブジェクトのタグが"Player"のとき
-
-            //オブジェクトの色を赤に変更する
-            foreach (var ps in playerStates)
+        foreach (var ps in playerStates)
+        {
+            print("finish");
+            if (ps.agentScript != null)
             {
-                print("finish");
-                if (ps.agentScript != null)
-                {
-                    //子供の負け
-                    ps.agentScript.AddReward(-1);
-                    ps.agentScript.Done();
-                }
-                else
-                {
+            //子供の負け
+                ps.agentScript.AddReward(-1);
+                ps.agentScript.Done();
+            }
+            else
+            {
                 //鬼の勝利なので
                     ps.oniScript.AddReward(1);
                     ps.oniScript.Done();
                 //ps.agentScript.AddReward(1);
             }
-
-                 //all agents need to be reset                           
-
-            }
+        }
     }
 }
