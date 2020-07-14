@@ -78,6 +78,11 @@ public class OniScript : Agent
         area.Update();
         // Fell off platform
         // Rewards
+
+        if (now_step < 700) {
+            //かくれんぼだから、最初は待機
+            return;
+        }
         float distanceToTarget = Vector3.Distance(this.transform.localPosition,
                                                   Kodomo.localPosition);
         // Reached target
@@ -91,6 +96,7 @@ public class OniScript : Agent
         {
             Done();
         }
+
         MoveAgent(vectorAction);
     }
 

@@ -70,7 +70,11 @@ public override void InitializeAgent()
     this.agentRb.angularVelocity = Vector3.zero;
     this.agentRb.velocity = Vector3.zero;
     this.transform.localPosition = new Vector3(x, 0.5f, z);
-  }
+
+    float cube_x = Random.Range(-4.3f, 4.3f);
+    float cube_z = Random.Range(-4.3f, 4.3f);
+    this.canMoveObject.transform.localPosition = new Vector3(cube_x, 0.5f, cube_z);
+    }
 
   public float speed = 1;
   public override void AgentAction(float[] vectorAction)
